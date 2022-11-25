@@ -1,12 +1,12 @@
-# Virtual Schema for document data in files on Azure Data Lake Storage Gen 2 1.1.3, released 2022-11-21
+# Virtual Schema for document data in files on Azure Data Lake Storage Gen 2 1.2.0, released 2022-11-25
 
 Code name: Fixed CVE-2022-42004
 
 ## Summary
 
-The dependency `com.fasterxml.jackson.core:jackson-databind` in version 2.13.4 is vulnerable to CVE-2022-42004, so we updated to 2.14.0, which is not affected.
+The dependency `com.fasterxml.jackson.core:jackson-databind` in version 2.13.4 is vulnerable to CVE-2022-42004, so we updated to 2.14.1, which is not affected.
 
-We also removed Lombok from the project.
+We also unified the way [debug output](../developer_guide/developer_guide.md#getting-debug-output) is controlled and removed Lombok from the project.
 
 ### Known Issues
 
