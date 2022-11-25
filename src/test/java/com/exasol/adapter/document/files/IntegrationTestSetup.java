@@ -9,14 +9,11 @@ import com.exasol.dbbuilder.dialects.DatabaseObject;
 import com.exasol.dbbuilder.dialects.exasol.*;
 import com.exasol.dbbuilder.dialects.exasol.udf.UdfScript;
 import com.exasol.exasoltestsetup.ExasolTestSetup;
-import com.exasol.exasoltestsetup.ServiceAddress;
 import com.exasol.udfdebugging.UdfTestSetup;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.json.JsonWriter;
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +31,7 @@ import java.util.concurrent.TimeoutException;
 import static com.exasol.adapter.document.GenericUdfCallHandler.*;
 
 public class IntegrationTestSetup implements AutoCloseable {
-    private static final String ADAPTER_JAR = "document-files-virtual-schema-dist-7.1.2-azure-datalake-storage-gen2-1.1.2.jar";
+    private static final String ADAPTER_JAR = "document-files-virtual-schema-dist-7.1.2-azure-datalake-storage-gen2-1.1.3.jar";
     private final ExasolTestSetup exasolTestSetup;
     private final Connection exasolConnection;
     private final Statement exasolStatement;
@@ -45,9 +42,7 @@ public class IntegrationTestSetup implements AutoCloseable {
     private final AdlsTestSetup adlsTestSetup;
     private final DataLakeFileSystemClient adlsContainer;
     private final UdfTestSetup udfTestSetup;
-    @Getter
-    @Setter
-    private ConnectionDefinition connectionDefinition;
+    private final ConnectionDefinition connectionDefinition;
 
     public IntegrationTestSetup(final ExasolTestSetup exasolTestSetup, final AdlsTestSetup adlsTestSetup,
                                 final DataLakeFileSystemClient adlsContainer)
@@ -64,7 +59,7 @@ public class IntegrationTestSetup implements AutoCloseable {
         this.bucket = this.exasolTestSetup.getDefaultBucket();
         this.udfTestSetup = new UdfTestSetup(this.exasolTestSetup, this.exasolConnection);
 
-        final List<String> jvmOptions = new ArrayList(Arrays.asList(this.udfTestSetup.getJvmOptions()));
+        final List<String> jvmOptions = Arrays.asList(this.udfTestSetup.getJvmOptions());
         this.exasolObjectFactory = new ExasolObjectFactory(this.exasolConnection,
                 ExasolObjectConfiguration.builder().withJvmOptions(jvmOptions.toArray(String[]::new)).build());
         final ExasolSchema adapterSchema = this.exasolObjectFactory.createSchema("ADAPTER");
@@ -88,11 +83,6 @@ public class IntegrationTestSetup implements AutoCloseable {
     private ConnectionDefinition createConnectionDefinition() {
         final JsonObjectBuilder configJson = getConnectionConfig();
         return createConnectionDefinition(configJson);
-    }
-
-    private Optional<String> getHostOverride() {
-        return this.adlsTestSetup.getHostOverride().map(address -> this.exasolTestSetup
-                .makeTcpServiceAccessibleFromDatabase(ServiceAddress.parse(address)).toString());
     }
 
     public JsonObjectBuilder getConnectionConfig() {
