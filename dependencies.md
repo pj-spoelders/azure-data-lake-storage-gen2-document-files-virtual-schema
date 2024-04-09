@@ -28,6 +28,12 @@
 | [EqualsVerifier \| release normal jar][24]     | [Apache License, Version 2.0][7]  |
 | [JaCoCo :: Agent][25]                          | [Eclipse Public License 2.0][26]  |
 
+## Runtime Dependencies
+
+| Dependency                                     | License                    |
+| ---------------------------------------------- | -------------------------- |
+| [Microsoft Azure Netty HTTP Client Library][4] | [The MIT License (MIT)][5] |
+
 ## Plugin Dependencies
 
 | Dependency                                              | License                          |
@@ -47,7 +53,7 @@
 | [Artifact reference checker and unifier][43]            | [MIT License][44]                |
 | [Apache Maven Dependency Plugin][45]                    | [Apache-2.0][7]                  |
 | [Maven Failsafe Plugin][46]                             | [Apache-2.0][7]                  |
-| [JaCoCo :: Maven Plugin][47]                            | [Eclipse Public License 2.0][26] |
+| [JaCoCo :: Maven Plugin][47]                            | [EPL-2.0][26]                    |
 | [error-code-crawler-maven-plugin][48]                   | [MIT License][49]                |
 | [Reproducible Build Maven Plugin][50]                   | [Apache 2.0][34]                 |
 
