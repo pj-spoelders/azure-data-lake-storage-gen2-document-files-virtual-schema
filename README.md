@@ -23,6 +23,7 @@ For supported document file formats, see [Files Virtual Schema][files-vs].
 * [User Guide](doc/user_guide/user_guide.md)
 * [Changelog](doc/changes/changelog.md)
 
+
 ## Information for Developers
 
 * [Dependencies](dependencies.md)
